@@ -1,0 +1,29 @@
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+Debounce16	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+update	KEYWORD2
+isPressed	KEYWORD2
+isReleased	KEYWORD2
+isDown	KEYWORD2
+isUp	KEYWORD2
+enableDoublePressDetection	KEYWORD2
+setDoublePressWindow	KEYWORD2
+enableLongPressDetection	KEYWORD2
+setLongPressThreshold	KEYWORD2
+isDoublePressed	KEYWORD2
+isLongPressed	KEYWORD2
+getClickCount	KEYWORD2
+onPress	KEYWORD2
+onRelease	KEYWORD2
+onDoublePress	KEYWORD2
+onLongPressStart	KEYWORD2
+onLongPressEnd	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
